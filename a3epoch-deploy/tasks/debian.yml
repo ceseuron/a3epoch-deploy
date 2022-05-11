@@ -1,0 +1,58 @@
+- name: Install multiverse repository.
+  apt_repository:
+    repo: deb http://archive.ubuntu.com/ubuntu focal multiverse
+    state: present
+    update_cache: true
+
+- name: Install software-properties-common
+  apt:
+    name: software-properties-common
+    state: present
+    update_cache: true
+
+- name: Check if i386 architecture is installed already.
+  shell: dpkg --print-foreign-architectures | grep i386
+  register: i386_result
+  ignore_errors: true
+
+- name: Install i386 architecture.
+  command: dpkg --add-architecture i386
+  when: i386_result.rc >= 1
+
+- name: Install packages.
+  apt:
+    name: ['lib32gcc1', 'perl-modules', 'curl', 'lsof', 'libc6-i386', 'bzip2']
+    state: present
+    update_cache: true
+
+- name: Set open file limit for sysctl.
+  sysctl:
+    name: fs.file-max
+    value: 100000
+    state: present
+    reload: yes
+
+- name: Set PAM nofile hard limit.
+  pam_limits:
+    domain: "*"
+    limit_item: nofile
+    limit_type: hard
+    value: 1000000
+
+- name: Set PAM nofile soft limit.
+  pam_limits:
+    domain: "*"
+    limit_item: nofile
+    limit_type: soft
+    value: 1000000
+
+- name: Set PAM session requirements.
+  pamd:
+    name: common-session
+    module_path: pam_systemd.so
+    type: session
+    control: optional
+    new_type: session
+    new_control: required
+    new_module_path: pam_limits.so
+    state: after
