@@ -1,0 +1,3 @@
+# Define local user and group for the Arma 3 server to run under.
+steam_group: "steam"
+steam_user: "steam"

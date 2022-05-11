@@ -1,0 +1,23 @@
+- name: Auto-accept Steam license.
+  debconf:
+    name: "steam"
+    question: "steam/question"
+    value: "I AGREE"
+    vtype: "select"
+
+- name: Install package steamcmd.
+  apt:
+    name: steamcmd
+    state: present
+
+- name: Set up Steam group.
+  group:
+    name: "{{ steam_group }}"
+    state: present
+
+- name: Set up Steam user.
+  user:
+    name: "{{ steam_user }}"
+    comment: Steam server user.
+    group: "{{ steam_group }}"
+    state: present

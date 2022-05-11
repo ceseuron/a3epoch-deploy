@@ -1,0 +1,6 @@
+- name: Prepare system - Ubuntu/Debian.
+  include_tasks: debian.yml
+  when: ansible_facts['os_family'] == 'Debian'
+
+- name: Set up Steam
+  include_tasks: steam.yml
