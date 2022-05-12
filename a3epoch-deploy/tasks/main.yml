@@ -1,6 +1,3 @@
-- name: Initialization.
-  include_tasks: init.yml
-  
 - name: Prepare system - Ubuntu/Debian.
   include_tasks: debian.yml
   when: ansible_facts['os_family'] == 'Debian'

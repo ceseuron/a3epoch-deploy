@@ -1,9 +1,0 @@
-- name: Checking Steamguard response.
-  fail:
-    msg: You did not specify a response for Steam Guard.
-  when: steam_guard_ask != "y" or steam_guard_ask != "n"
-
-- name: Cheack Steam username and password.
-  fail:
-    msg: You did not specify a Steam username and password. You must provide a valid username and password for Steamcmd to download Arma3 and workshop items.
-  when: steam_login is undefined or steam_pass is undefined
