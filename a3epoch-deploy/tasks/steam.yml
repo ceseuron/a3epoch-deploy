@@ -26,3 +26,6 @@
   file:
     path: /home/"{{ steam_user }}"/epoch
     state: directory
+    owner: "{{ steam_user }}"
+    group: "{{ steam_group }}"
+    mode: 0755
