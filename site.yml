@@ -1,9 +1,9 @@
-- hosts: all
+- hosts: localhost
   vars_prompt:
     - name: steam_guard_ask
       prompt: Are you using Steamguard? y/n
       private: no
-      
+
     - name: steam_login
       prompt: Enter your Steam username.
       private: no
