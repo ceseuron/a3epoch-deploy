@@ -23,5 +23,6 @@
     state: present
 
 - name: Set up Epoch directory.
-  path: "/home/{{ steam_user }}/epoch"
-  state: directory
+  file:
+    path: /home/"{{ steam_user }}"/epoch
+    state: directory
