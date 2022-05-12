@@ -21,3 +21,7 @@
     comment: Steam server user.
     group: "{{ steam_group }}"
     state: present
+
+- name: Set up Epoch directory.
+  path: /home/"{{ steam_user }}"/epoch
+  state: directory
