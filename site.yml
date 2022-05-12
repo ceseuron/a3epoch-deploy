@@ -1,3 +1,16 @@
-- hosts: localhost
+- hosts: all
+  vars_prompt:
+    - name: steam_guard_ask
+      prompt: Are you using Steamguard? y/n
+      private: no
+      
+    - name: steam_login
+      prompt: Enter your Steam username.
+      private: no
+
+    - name: steam_pass
+      prompt: Enter your Steam password.
+      private: yes
+
   roles:
     - a3epoch-deploy

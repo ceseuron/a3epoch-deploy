@@ -1,0 +1,4 @@
+- name: Checking Steamguard response.
+  fail:
+    msg: You did not specify a valid response to the Steamguard prompt.
+  when: not steam_guard_ask is regex(^(Y\b)|(y\b)|(N\b)|(n\b))
